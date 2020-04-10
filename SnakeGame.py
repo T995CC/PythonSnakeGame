@@ -5,8 +5,9 @@ import random
 
 delay = 0.10
 
-score=0
-hscore=0
+score = 0
+hscore = 0
+d = 42
 
 window = turtle.Screen()
 window.title("Snake Game")
@@ -68,32 +69,51 @@ body = []
 
 # functions
 def go_up():
-	if head.direction != "down":
+	if head.direction != "down" and d != 1:
 		head.direction = "up"
+		print(d, "go")
 def go_down():
-	if head.direction != "up":
+	if head.direction != "up" and d != 0:
 		head.direction = "down"
+		print(d, "go")
 def go_left():
-	if head.direction != "right":
+	if head.direction != "right" and d != 3:
 		head.direction = "left"
+		print(d, "go")
 def go_right():
-	if head.direction != "left":
+	if head.direction != "left" and d != 2:
 		head.direction = "right"
+		print(d, "go")
 def stop():
 	head.direction = "stop"
 
 
 def move():
+	
+	global d
+
 	if head.direction == "up":
+		print(d, "move")
+		d = 0
+		print(d, "move")
 		y = head.ycor()
 		head.sety(y+20)
 	if head.direction == "down":
+		print(d, "move")
+		d = 1
+		print(d, "move")
 		y = head.ycor()
 		head.sety(y-20)
 	if head.direction == "left":
+		print(d, "move")
+		d = 2
+		print(d, "move")
 		x = head.xcor()
 		head.setx(x-20)
 	if head.direction == "right":
+		print(d, "move")
+		d = 3
+		print(d, "move")
 		x = head.xcor()
 		head.setx(x+20)
 
@@ -116,12 +136,12 @@ while True:
 			score = 0
 			pen.clear()
 			pen1.clear()
-			pen.write("Score: {} ".format(score), align = "left", font = ("Comic Sans", 19, "normal"))
-			pen1.write("High Score: {} ".format(hscore), align = "right", font = ("Comic Sans", 19, "normal"))
+			pen.write(f"Score: {score} ", align = "left", font = ("Comic Sans", 19, "normal"))
+			pen1.write(f"High Score: {hscore} ", align = "right", font = ("Comic Sans", 19, "normal"))
 			for segment in body:
 				segment.goto(1000,1000)
 			body.clear()
-			
+
 		if head.distance(food)<20:
 			x = random.randrange(-240,240,20)
 			y = random.randrange(-240,240,20)
